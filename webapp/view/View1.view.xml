@@ -1,0 +1,56 @@
+<mvc:View
+    controllerName="vbakfilter.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+					<VBox fitContainer="true">
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="ZCDS_VBAK"  search="onSearch"  basicSearchFieldName="Ernam" enableBasicSearch="true" >
+				<smartFilterBar:controlConfiguration>
+				<smartFilterBar:ControlConfiguration visibleInAdvancedArea="true" key="Ernam"/>
+					<!-- <smartFilterBar:ControlConfiguration visibleInAdvancedArea="true" key="Erdat" controlType="date"/> -->
+					<smartFilterBar:ControlConfiguration visibleInAdvancedArea="true" key="Erdat" controlType="date">
+						<smartFilterBar:customControl>
+								<DatePicker
+								id="DP1"
+								valueFormat="dd-MM-yyyy"
+								displayFormat="short"
+								placeholder="Enter Date"
+								class="sapUiSmallMarginBottom"/>
+							</smartFilterBar:customControl>
+						</smartFilterBar:ControlConfiguration>
+				</smartFilterBar:controlConfiguration>
+				<!-- layout data used to make the table growing but the filter bar fixed -->
+				<smartFilterBar:layoutData>
+					<FlexItemData shrinkFactor="0"/>
+				</smartFilterBar:layoutData>
+			</smartFilterBar:SmartFilterBar>
+			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="ZCDS_VBAK" smartFilterId="smartFilterBar" tableType="Table" 
+			useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" 
+			useTablePersonalisation="true" header="Line Items" showRowCount="true" 
+			 enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" 
+			 editTogglable="true" app:useSmartToggle="true"
+			 initiallyVisibleFields="Vbeln,Erdat,Erzet,Ernam,Angdt,Bnddt,Audat" beforeRebindTable="onRebinding">
+				<!-- layout data used to make the table growing but the filter bar fixed -->
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+			</smartTable:SmartTable>
+		</VBox>
+					
+					
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
